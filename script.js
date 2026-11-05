@@ -309,13 +309,24 @@ async function loadDailyHistory() {
           study_date,
           correct_count,
           total_questions,
-          qualifies
+          qualifies,
+          accuracy
         `)
         .eq("user_id", currentUser.id)
         .order("study_date", {
           ascending: true
         });
 
+   if (data) {
+     dailyCorrectCount = data.correct_count;
+     dailyTotalQuestions = data.total_questions;
+   
+     const accuracy = Number(data.accuracy) || 0;
+   
+     document.getElementById("accuracy").textContent =
+       `${accuracy.toFixed(0)}%`;
+   }     
+     
     if (error) throw error;
 
     const history = data || [];
