@@ -295,6 +295,7 @@ function applyDailyLimit() {
    LOAD DAILY HISTORY
 ===================================== */
 
+
 async function loadDailyHistory() {
   if (!supabaseClient || !currentUser) {
     updateCombos([]);
@@ -317,16 +318,6 @@ async function loadDailyHistory() {
           ascending: true
         });
 
-   if (data) {
-     dailyCorrectCount = data.correct_count;
-     dailyTotalQuestions = data.total_questions;
-   
-     const accuracy = Number(data.accuracy) || 0;
-   
-     document.getElementById("accuracy").textContent =
-       `${accuracy.toFixed(0)}%`;
-   }     
-     
     if (error) throw error;
 
     const history = data || [];
@@ -343,6 +334,13 @@ async function loadDailyHistory() {
     dailyTotalQuestions =
       todayRecord?.total_questions ?? 0;
 
+    // Load today's saved accuracy from Supabase.
+    const dailyAccuracy =
+      Number(todayRecord?.accuracy) || 0;
+
+    accuracyElement.textContent =
+      `${Math.round(dailyAccuracy)}%`;
+
     updateCombos(history);
 
     applyDailyLimit();
@@ -352,6 +350,7 @@ async function loadDailyHistory() {
       {
         dailyCorrectCount,
         dailyTotalQuestions,
+        dailyAccuracy,
         history
       }
     );
@@ -363,7 +362,6 @@ async function loadDailyHistory() {
     );
   }
 }
-
 
 /* =====================================
    SAVE DAILY HISTORY
