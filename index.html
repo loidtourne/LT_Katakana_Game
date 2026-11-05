@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#191919">
+  <title>Katakana Quiz</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const KATAKANA_SUPABASE_URL =
+      "https://ckbasqdqtmxwrixcctca.supabase.co";
+
+    const KATAKANA_SUPABASE_ANON_KEY =
+      "sb_publishable_Gumosi4t5hmBCR_eiLLNNw_unIoQjo_";
+
+    window.katakanaSupabaseClient =
+      window.supabase.createClient(
+        KATAKANA_SUPABASE_URL,
+        KATAKANA_SUPABASE_ANON_KEY
+      );
+  </script>
+</head>
+
+<body>
+  <main class="game">
+
+    <header class="header">
+      <p class="eyebrow">JAPANESE STUDY</p>
+      <h1>Katakana Quiz</h1>
+      <p class="subtitle">
+        Choose the correct romaji for each character.
+      </p>
+    </header>
+
+    <section class="stats">
+
+      <div class="stat">
+        <span class="stat-label">Current Combo</span>
+        <div class="stat-value">
+          <strong id="currentCombo">🔥 0</strong>
+          <span>days</span>
+        </div>
+      </div>
+
+      <div class="stat">
+        <span class="stat-label">Best Combo</span>
+        <div class="stat-value">
+          <strong id="bestCombo">🔥 0</strong>
+          <span>days</span>
+        </div>
+      </div>
+
+      <div class="stat">
+        <span class="stat-label">Accuracy</span>
+        <div class="stat-value">
+          <strong id="accuracy">0%</strong>
+          <span>overall</span>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="quiz-card">
+
+      <div class="character" id="katakanaCharacter" lang="ja">
+        ア
+      </div>
+
+      <p class="feedback" id="feedback" aria-live="polite">
+        Choose the matching sound.
+      </p>
+
+      <div class="answers" id="answers">
+        <button class="answer" type="button"></button>
+        <button class="answer" type="button"></button>
+        <button class="answer" type="button"></button>
+        <button class="answer" type="button"></button>
+      </div>
+
+      <div class="action-area">
+        <button
+          class="next-button"
+          id="nextButton"
+          type="button"
+          hidden
+        >
+          Next question
+        </button>
+      </div>
+
+      <p class="attempts" id="attempts">
+        You have 3 attempts.
+      </p>
+
+    </section>
+
+    <footer>
+      <span>Katakana practice</span>
+
+      <div class="footer-actions">
+        <button
+          class="reset-button"
+          id="resetButton"
+          type="button"
+        >
+          Reset score
+        </button>
+
+        <button
+          class="auth-button"
+          id="authButton"
+          type="button"
+        >
+          Sign in
+        </button>
+      </div>
+
+      <form class="login-panel" id="loginPanel" hidden>
+        <label for="loginEmail">Email address</label>
+
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required
+        >
+
+        <button
+          class="auth-submit"
+          id="loginSubmit"
+          type="submit"
+        >
+          Send sign-in link
+        </button>
+
+        <p
+          class="login-message"
+          id="loginMessage"
+          aria-live="polite"
+        ></p>
+      </form>
+
+      <p class="account-status" id="accountStatus">
+        Study mode
+      </p>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
