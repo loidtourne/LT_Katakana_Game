@@ -400,7 +400,7 @@ function startQuestion() {
     button.dataset.answer = options[index];
 
     button.disabled = false;
-    button.classList.remove("correct", "incorrect");
+    button.classList.remove("right", "wrong");
   });
 }
 
@@ -424,7 +424,7 @@ async function completeQuestion(wasCorrect) {
     button.disabled = true;
 
     if (button.dataset.answer === currentQuestion.answer) {
-      button.classList.add("correct");
+      button.classList.add("right");
     }
   });
 
@@ -473,7 +473,7 @@ async function chooseAnswer(button) {
   const selectedAnswer = button.dataset.answer;
 
   if (selectedAnswer === currentQuestion.answer) {
-    button.classList.add("correct");
+    button.classList.add("right");
 
     if (feedbackElement) {
       feedbackElement.textContent = "Correct! Well done.";
@@ -483,7 +483,7 @@ async function chooseAnswer(button) {
     return;
   }
 
-  button.classList.add("incorrect");
+  button.classList.add("wrong");
   button.disabled = true;
 
   attemptsRemaining--;
